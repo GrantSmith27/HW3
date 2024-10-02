@@ -384,6 +384,26 @@ class LUC_AVLTree {
                 node.value = temp.value; // Copy the inorder successor's value to this node
                 node.rightChild = deleteElement(temp.value, node.rightChild); // Delete the inorder successor
             }
+        //recalculate height of the current node
+        node.height = getMaxHeight(getHeight(node.leftChild), getHeight(node.rightChild)) + 1;
+        //check if the node is balanced
+        int bf = getBalanceFactor(node);
+        //Left Left Rotation
+        if (bf > 1 && getBalanceFactor(node.leftChild) >= 0) {
+            return LLRotation(node);
+        }
+        //Left Right Rotation
+        if (bf > 1 && getBalanceFactor(node.leftChild) < 0) {
+            return LRRotation(node);
+        }
+        //Right Right Rotation
+        if (bf < -1 && getBalanceFactor(node.rightChild) <= 0) {
+            return RRRotation(node);
+        }
+        //Right Left Rotation
+        if (bf < -1 && getBalanceFactor(node.rightChild) > 0) {
+            return RLRotation(node);
+        }
         return node;
     }
 
@@ -447,9 +467,9 @@ class LUC_AVLTree {
      *          /   \          ==>          /     \
      *         Z     yr                    Z       X
      *        / \                        /   \    /  \
-     *       zl  zr                     zr   zl  yr  xr
+     *  //     zl  zr                     zr   zl  yr  xr
      *
-     *  @param X - node that is out of balance
+     * // @param X - node that is out of balance
      *
      *  @return Y - new top node of [sub]tree after rotation
      */
@@ -486,7 +506,7 @@ class LUC_AVLTree {
      *           / \                 /   \    /  \
      *          zl  zr              yl   zl  zr  xr
      *
-     *  @param X - node that is out of balance
+     * // @param X - node that is out of balance
      *
      *  @return Z - new top of the [sub]tree after rotation
      */
@@ -526,7 +546,7 @@ class LUC_AVLTree {
      *                     / \                 /   \    /  \
      *                    zl  zr              xl   yl  zl  zr
      *
-     *  @param X - node that is out of balance
+     * // @param X - node that is out of balance
      *
      *  @return Y - new top node of [sub]tree after rotation
      */
@@ -562,7 +582,7 @@ class LUC_AVLTree {
      *          / \                       /   \    /  \
      *         zl  zr                    xl   zl  zr  yr
      *
-     *  @param X - node that is out of balance
+     * // @param X - node that is out of balance
      *
      *  @return Z - new top of the [sub]tree after rotation
      */
