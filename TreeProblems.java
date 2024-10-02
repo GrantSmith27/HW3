@@ -33,17 +33,17 @@ public class TreeProblems {
     TreeSet<Integer> TempSet2 = new TreeSet<>();
 
     //Have one set have all the values
-    TempSet1.addAll(setA);
-    TempSet1.addAll(setB);
+    TempSet1.addAll(setA); //Add set A
+    TempSet1.addAll(setB); //Add set B
 
     //Have the other set have all the common values
-    TempSet2.addAll(setB);
-    TempSet2.retainAll(setA);
+    TempSet2.addAll(setB); //Add set B
+    TempSet2.retainAll(setA); //Only retain values from set A
 
-    //subtract them from each other
+    //Subtract them from each other
     TempSet1.removeAll(TempSet2);
 
-    //return the result
+    //Return the result
     return TempSet1;
   }
 
@@ -57,9 +57,19 @@ public class TreeProblems {
 
   public static void removeEven(Map<Integer, String> treeMap) {
 
-    // INSERT CODE HERE.
+    // Create a list for keys to be removed
+    List<Integer> keysToRemove = new ArrayList<>();
 
-    return;
+    // Add the even keys to the list
+    for (Integer key : treeMap.keySet()) {
+      if (key % 2 == 0) {
+        keysToRemove.add(key);
+      }
+    }
+    // Then remove those keys
+    for (Integer key : keysToRemove) {
+      treeMap.remove(key);
+    }
   }
 
 
@@ -72,10 +82,8 @@ public class TreeProblems {
 
   public boolean treesEqual(Map<Integer, String> tree1,Map<Integer, String> tree2 ) {
 
-    // INSERT CODE HERE
+    return tree1.equals(tree2);
 
-    return false;
-
-  }
-
-} // end treeProblems class
+    }
+// end treeProblems class;
+}
