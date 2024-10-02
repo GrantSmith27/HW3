@@ -43,6 +43,7 @@ public class TreeProblems {
     //subtract them from each other
     TempSet1.removeAll(TempSet2);
 
+    //return the result
     return TempSet1;
   }
 
