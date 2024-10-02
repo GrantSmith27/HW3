@@ -9,6 +9,7 @@
 
 import java.lang.Math;
 
+//Grant Smith Comp 272
 
 /**
  *  Class: Node
