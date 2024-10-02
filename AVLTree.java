@@ -301,7 +301,7 @@ class LUC_AVLTree {
      *
      *  This includes the following scenarios of where the node to delete is 
      *  in the tree:
-     *    1. leaf node - simpliest case, just return null (which removes node)
+     *    1. leaf node - simplest case, just return null (which removes node)
      *    2. interior node with only left subtree below it (node gets replaced 
      *       with left subtree)
      *    3. interior node with only right subtree below it (node gets replaced
@@ -362,8 +362,31 @@ class LUC_AVLTree {
          * do many of the same things as this method.
          */
 
+        //if tree is empty
+        if (node==null){
+            return null;
+        }
+        //recursion on the left
+        if (value<node.value){
+            node.leftChild=deleteElement(value, node.leftChild);
+        }
+        //recursion on the right
+        else if (value>node.value){
+            node.rightChild=deleteElement(value, node.rightChild);
+        } //found the node
+        else     // Node with only one child or no child
+            if ((node.leftChild == null) || (node.rightChild == null)) {
+                Node temp = (node.leftChild != null) ? node.leftChild : node.rightChild; // Get the non-null child
+                return temp; // Return the non-null child or null
+            } else {
+                // Node with two children, get the inorder successor
+                Node temp = minValueNode(node.rightChild);
+                node.value = temp.value; // Copy the inorder successor's value to this node
+                node.rightChild = deleteElement(temp.value, node.rightChild); // Delete the inorder successor
+            }
         return node;
     }
+
 
 
     /**
